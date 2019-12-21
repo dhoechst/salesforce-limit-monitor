@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LMT001_TemporaryThresholdReqExpiration</fullName>
+    <active>true</active>
+    <description>When a temporary threshold is entered, an expiration date time is needed</description>
+    <errorConditionFormula>NOT(ISBLANK(TemporaryAlertThreshold__c)) &amp;&amp; ISBLANK( TemporaryAlertThresholdExpiration__c)</errorConditionFormula>
+    <errorDisplayField>TemporaryAlertThresholdExpiration__c</errorDisplayField>
+    <errorMessage>When a Temporary Alert Threshold is entered, the Temporary Alert Threshold Expiration is needed. [LMT-001]</errorMessage>
+</ValidationRule>

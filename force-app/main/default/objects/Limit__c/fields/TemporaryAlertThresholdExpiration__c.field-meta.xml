@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TemporaryAlertThresholdExpiration__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>When to remove the temporary alert threshold. The Temporary Alert Threshold field will be cleared at this time.</inlineHelpText>
+    <label>Temporary Alert Threshold Expiration</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

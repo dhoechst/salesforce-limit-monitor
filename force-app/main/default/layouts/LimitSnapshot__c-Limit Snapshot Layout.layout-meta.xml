@@ -30,6 +30,10 @@
                 <behavior>Edit</behavior>
                 <field>PercentChangedSinceLastSnapshot__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>PastRetentionPeriod__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

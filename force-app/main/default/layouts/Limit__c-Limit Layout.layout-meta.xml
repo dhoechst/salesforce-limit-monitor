@@ -24,6 +24,10 @@
                 <field>RetrieveIntervalHours__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MuteAlerts__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastRetrieveTime__c</field>
             </layoutItems>
@@ -47,15 +51,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MuteAlerts__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>NextRetrieveTime__c</field>
+                <field>SnapshotRetentionDays__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>LastSnapshotValue__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>NextRetrieveTime__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -95,6 +99,10 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>CREATED_DATE</fields>
+        <fields>Value__c</fields>
+        <fields>MaximumValue__c</fields>
+        <fields>PercentOfLimit__c</fields>
         <relatedList>LimitSnapshot__c.Limit__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

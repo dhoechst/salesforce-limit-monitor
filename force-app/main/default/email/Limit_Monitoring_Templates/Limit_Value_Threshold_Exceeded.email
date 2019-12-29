@@ -1,0 +1,34 @@
+<messaging:emailTemplate subject="Salesforce Limit Exceeded for {!relatedTo.Limit__r.Name}" recipientType="User" relatedToType="LimitSnapshot__c">
+<messaging:htmlEmailBody >
+<html>
+<body>
+The limit for <b>{!relatedTo.Limit__r.Name}</b> has exceeded the threshold set.<br/>
+<br/>
+<b>Current Value:  </b>
+<apex:outputText value="{0, number, ###,##0}">
+    <apex:param value="{!relatedTo.Value__c}"/>
+</apex:outputText><br/>
+<b>Limit:  </b>
+<apex:outputText value="{0, number, ###,##0}">
+    <apex:param value="{!relatedTo.MaximumValue__c}"/>
+</apex:outputText><br/>
+<b>Percent of Limit:  </b>
+<apex:outputText value="{0,number,0}%">
+    <apex:param value="{!relatedTo.PercentOfLimit__c}" />
+</apex:outputText><br/>
+
+<b>Alert Threshold:  </b>
+<apex:outputText value="{0,number,0}%">
+    <apex:param value="{!relatedTo.Limit__r.AlertThreshold__c}" />
+</apex:outputText><br/>
+</body>
+</html>
+</messaging:htmlEmailBody>
+<messaging:plainTextEmailBody >
+The limit for {!relatedTo.Limit__r.Name} has exceeded the threshold set.
+Current Value: {!TEXT(relatedTo.Value__c)}
+Limit: {!TEXT(relatedTo.MaximumValue__c)}
+Percent of Limit: {!TEXT(relatedTo.PercentOfLimit__c)}%
+Alert Threshold: {!TEXT(relatedTo.Limit__r.AlertThreshold__c)}%
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

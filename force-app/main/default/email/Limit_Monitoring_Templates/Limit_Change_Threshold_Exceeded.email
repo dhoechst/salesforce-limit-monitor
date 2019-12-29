@@ -1,0 +1,42 @@
+<messaging:emailTemplate subject="Salesforce Limit Change Exceeded for {!relatedTo.Limit__r.Name}" recipientType="User" relatedToType="LimitSnapshot__c">
+<messaging:htmlEmailBody >
+<html>
+<body>
+The limit for <b>{!relatedTo.Limit__r.Name}</b> has exceeded the threshold set for percent of change between snapshots.<br/>
+<br/>
+<b>Previous Value: </b><apex:outputText value="{0, number, ###,##0}">
+    <apex:param value="{!relatedTo.Limit__r.LastSnapshotValue__c}"/>
+</apex:outputText><br/>
+<b>Current Value:  </b>
+<apex:outputText value="{0, number, ###,##0}">
+    <apex:param value="{!relatedTo.Value__c}"/>
+</apex:outputText><br/>
+<b>Limit:  </b>
+<apex:outputText value="{0, number, ###,##0}">
+    <apex:param value="{!relatedTo.MaximumValue__c}"/>
+</apex:outputText><br/>
+<b>Percent of Limit:  </b>
+<apex:outputText value="{0,number,0}%">
+    <apex:param value="{!relatedTo.PercentOfLimit__c}" />
+</apex:outputText><br/>
+<b>Percent Changed:  </b>
+<apex:outputText value="{0,number,0}%">
+    <apex:param value="{!relatedTo.PercentChangedSinceLastSnapshot__c}" />
+</apex:outputText><br/>
+<b>Change Threshold:  </b>
+<apex:outputText value="{0,number,0}%">
+    <apex:param value="{!relatedTo.Limit__r.ChangeThreshold__c}" />
+</apex:outputText><br/>
+</body>
+</html>
+</messaging:htmlEmailBody>
+<messaging:plainTextEmailBody >
+The limit for {!relatedTo.Limit__r.Name} has exceeded the threshold set for percent of change between snapshots.
+Previous Value: {!TEXT(relatedTo.Limit__r.LastSnapshotValue__c)}
+Current Value: {!TEXT(relatedTo.Value__c)}
+Limit: {!TEXT(relatedTo.MaximumValue__c)}
+Percent of Limit: {!TEXT(relatedTo.PercentOfLimit__c)}%
+Percent Changed: {!TEXT(relatedTo.PercentChangedSinceLastSnapshot__c)}% 
+Change Threshold: {!TEXT(relatedTo.Limit__r.ChangeThreshold__c)}%
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

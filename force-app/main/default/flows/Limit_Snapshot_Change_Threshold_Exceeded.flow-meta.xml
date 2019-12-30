@@ -22,7 +22,7 @@
         <inputParameters>
             <name>emailAddresses</name>
             <value>
-                <stringValue>dhoechst@instructure.com</stringValue>
+                <stringValue>changeme@sample.invalid</stringValue>
             </value>
         </inputParameters>
     </actionCalls>
@@ -50,7 +50,7 @@
         <inputParameters>
             <name>emailAddresses</name>
             <value>
-                <stringValue>dhoechst@instructure.com</stringValue>
+                <stringValue>changeme@sample.invalid</stringValue>
             </value>
         </inputParameters>
     </actionCalls>

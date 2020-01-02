@@ -6,7 +6,7 @@ You can also mute notifications for a certain time period or temporarily increas
 Installation steps
 
 1. Install Salesforce Test Factory (https://github.com/dhoechst/Salesforce-Test-Factory)
-2. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2G000000Y1APQA0)
+2. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2G000000Y1AUQA0)
 3. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
 4. To get push notifications, add users to the Limit Notification Queue.
 5. Add Limits records for limits you want to monitor. To add all limits, run this in Execute Anonymous:

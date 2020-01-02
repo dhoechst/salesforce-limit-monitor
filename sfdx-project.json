@@ -4,8 +4,8 @@
             "path": "force-app",
             "default": true,
             "package": "salesforce-limits-monitor",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
+            "versionName": "ver 0.1.1",
+            "versionNumber": "0.1.1.NEXT",
             "dependencies": [
                 {
                     "package": "04t2G000000Y19lQAC"
@@ -18,6 +18,7 @@
     "sourceApiVersion": "47.0",
     "packageAliases": {
         "salesforce-limits-monitor": "0Ho2G000000KyjQSAS",
-        "salesforce-limits-monitor@0.1.0-1": "04t2G000000Y1APQA0"
+        "salesforce-limits-monitor@0.1.0-1": "04t2G000000Y1APQA0",
+        "salesforce-limits-monitor@0.1.1-1": "04t2G000000Y1AUQA0"
     }
 }

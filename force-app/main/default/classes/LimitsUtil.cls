@@ -6,11 +6,12 @@ public with sharing class LimitsUtil {
     List<LimitSnapshot__c> snapshots = new List<LimitSnapshot__c>();
     List<Limit__c> limitsToUpdate = new List<Limit__c>();
 
-    // Query the limits to track and loop through them to record them
+    // Query the limits to track and loop through them to record them. 
+    // Use 2 minutes in the future as the comparison to account for variation in the scheduler.
     for (Limit__c lim : [
       SELECT Id, LimitKey__c
       FROM Limit__c
-      WHERE NextRetrieveTime__c = null OR NextRetrieveTime__c < :System.now()
+      WHERE NextRetrieveTime__c = null OR NextRetrieveTime__c < :System.now().addMinutes(2) 
     ]) {
       if (!limitsMap.containsKey(lim.LimitKey__c)) {
         lim.Errors__c = INVALID_LIMIT;

@@ -2,15 +2,13 @@
 public with sharing class LimitsUtilTest {
   @isTest
   static void testRetrieveLimits() {
-    Limit__c testLimit = (Limit__c) TestFactory.createSObject(
-      new Limit__c(
-        Name = 'API',
-        LimitKey__c = 'DailyApiRequests',
-        AlertThreshold__c = .8,
-        ChangeThreshold__c = .2
-      ),
-      true
+    Limit__c testLimit = new Limit__c(
+      Name = 'API',
+      LimitKey__c = 'DailyApiRequests',
+      AlertThreshold__c = .8,
+      ChangeThreshold__c = .2
     );
+    insert testLimit;
 
     Test.startTest();
     LimitsUtil.retrieveLimits();
@@ -29,15 +27,13 @@ public with sharing class LimitsUtilTest {
 
   @isTest
   static void testRetrieveLimitsError() {
-    Limit__c testLimit = (Limit__c) TestFactory.createSObject(
-      new Limit__c(
-        Name = 'API',
-        LimitKey__c = 'BadLimitName',
-        AlertThreshold__c = .8,
-        ChangeThreshold__c = .2
-      ),
-      true
+    Limit__c testLimit = new Limit__c(
+      Name = 'API',
+      LimitKey__c = 'BadLimitName',
+      AlertThreshold__c = .8,
+      ChangeThreshold__c = .2
     );
+    insert testLimit;
 
     Test.startTest();
     LimitsUtil.retrieveLimits();
@@ -61,16 +57,14 @@ public with sharing class LimitsUtilTest {
 
   @isTest
   static void testDeleteLimits() {
-    Limit__c testLimit = (Limit__c) TestFactory.createSObject(
-      new Limit__c(
-        Name = 'API',
-        LimitKey__c = 'DailyApiRequests',
-        AlertThreshold__c = .8,
-        ChangeThreshold__c = .2,
-        SnapshotRetentionDays__c = 0
-      ),
-      true
+    Limit__c testLimit = new Limit__c(
+      Name = 'API',
+      LimitKey__c = 'DailyApiRequests',
+      AlertThreshold__c = .8,
+      ChangeThreshold__c = .2,
+      SnapshotRetentionDays__c = 0
     );
+    insert testLimit;
 
     LimitsUtil.retrieveLimits();
 

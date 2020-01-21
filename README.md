@@ -5,11 +5,12 @@ You can also mute notifications for a certain time period or temporarily increas
 
 Installation steps
 
-1. Install Salesforce Test Factory (https://github.com/dhoechst/Salesforce-Test-Factory)
-2. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2G000000Y1AUQA0)
-3. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
-4. To get push notifications, add users to the Limit Notification Queue.
-5. Add Limits records for limits you want to monitor. To add all limits, run this in Execute Anonymous:
+> :warning: There is a known issue that prevents users from opening process builder from unlocked packages. Until this error is fixed, you won't be able to modify them. See https://success.salesforce.com/issues_view?id=a1p3A0000003UVoQAM
+
+1. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4O000000MjS8QAK)
+2. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
+3. To get push notifications, add users to the Limit Notification Queue.
+4. Add Limits records for limits you want to monitor. To add all limits, run this in Execute Anonymous:
 ```java
 Map<String,System.OrgLimit> limitsMap = OrgLimits.getMap();
 

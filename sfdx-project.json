@@ -2,23 +2,17 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true,
-            "package": "salesforce-limits-monitor",
-            "versionName": "ver 0.1.1",
-            "versionNumber": "0.1.1.NEXT",
-            "dependencies": [
-                {
-                    "package": "04t2G000000Y19lQAC"
-                }
-            ]
+            "package": "limits-monitor",
+            "versionName": "ver 0.2",
+            "versionNumber": "0.2.0.NEXT",
+            "default": true
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "47.0",
     "packageAliases": {
-        "salesforce-limits-monitor": "0Ho2G000000KyjQSAS",
-        "salesforce-limits-monitor@0.1.0-1": "04t2G000000Y1APQA0",
-        "salesforce-limits-monitor@0.1.1-1": "04t2G000000Y1AUQA0"
+        "limits-monitor": "0Ho4O000000CaRHSA0",
+        "limits-monitor@0.2.0-1": "04t4O000000MjS8QAK"
     }
 }

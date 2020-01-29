@@ -13,3 +13,5 @@ package.xml
 
 # profiles
 force-app/main/default/profiles
+force-app/main/default/profilePasswordPolicies
+force-app/main/default/profileSessionSettings

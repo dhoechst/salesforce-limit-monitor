@@ -8,15 +8,18 @@ Installation steps
 > :warning: There is a known issue that prevents users from opening process builder from unlocked packages. Until this error is fixed, you won't be able to modify them. See https://success.salesforce.com/issues_view?id=a1p3A0000003UVoQAM
 
 1. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4O000000MjS8QAK)
-2. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
-3. To get push notifications, add users to the Limit Notification Queue.
-4. Add Limits records for limits you want to monitor. To add all limits, run this in Execute Anonymous:
+2. If you want to send emails people or systems not in Salesforce. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
+3. To get emails and push notifications, add users to the Limit Notification Queue.
+4. You may have to edit the two invocable processes once deployed because the process builder metadata contains the queue Id and it doesn't deploy correctly.
+5. Add Limits records for limits you want to monitor. Make the owner be the Limit Notification Queue to send an email to all members of the queue. To add all limits, run this in Execute Anonymous:
 ```java
+Id limitsQueue = [SELECT Id FROM Group WHERE DeveloperName = 'Limit_Notification_Queue'].Id;
 Map<String,System.OrgLimit> limitsMap = OrgLimits.getMap();
 
 List<Limit__c> limits = new List<Limit__c>();
 for (String lim : limitsMap.keySet()) {
     limits.add(new Limit__c(
+        OwnerId = limitsQueue,
     	Name = lim,
     	LimitKey__c = lim
     ));

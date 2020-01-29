@@ -256,12 +256,12 @@
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>([LimitSnapshot__c].Value__c - [LimitSnapshot__c].Limit__c.LastSnapshotValue__c) /  [LimitSnapshot__c].Limit__c.LastSnapshotValue__c * 100</stringValue>
+                <stringValue>([LimitSnapshot__c].PercentOfLimit__c - [LimitSnapshot__c].Limit__c.LastPercentOfLimit__c) * 100 </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_2_myRule_1_A1_8920509623</name>
+        <name>formula_2_myRule_1_A1_3627824591</name>
         <dataType>Number</dataType>
-        <expression>({!myVariable_current.Value__c} - {!myVariable_current.Limit__r.LastSnapshotValue__c}) /  {!myVariable_current.Limit__r.LastSnapshotValue__c} * 100</expression>
+        <expression>({!myVariable_current.PercentOfLimit__c} - {!myVariable_current.Limit__r.LastPercentOfLimit__c}) * 100</expression>
         <scale>18</scale>
     </formulas>
     <formulas>
@@ -287,20 +287,20 @@
             <name>originalFormula</name>
             <value>
                 <stringValue>NOT([LimitSnapshot__c].Limit__c.MuteAlerts__c ) &amp;&amp;
-(([LimitSnapshot__c].Value__c - [LimitSnapshot__c].Limit__c.LastSnapshotValue__c) / [LimitSnapshot__c].Limit__c.LastSnapshotValue__c) &gt;= [LimitSnapshot__c].Limit__c.ChangeThreshold__c </stringValue>
+[LimitSnapshot__c].PercentChangedSinceLastSnapshot__c  &gt;= [LimitSnapshot__c].Limit__c.ChangeThreshold__c </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_6</name>
         <dataType>Boolean</dataType>
         <expression>NOT({!myVariable_current.Limit__r.MuteAlerts__c} ) &amp;&amp;
-(({!myVariable_current.Value__c} - {!myVariable_current.Limit__r.LastSnapshotValue__c}) / {!myVariable_current.Limit__r.LastSnapshotValue__c}) &gt;= {!myVariable_current.Limit__r.ChangeThreshold__c}</expression>
+{!myVariable_current.PercentChangedSinceLastSnapshot__c}  &gt;= {!myVariable_current.Limit__r.ChangeThreshold__c}</expression>
     </formulas>
     <formulas>
         <name>formula_myRule_8</name>
         <dataType>Boolean</dataType>
         <expression>true</expression>
     </formulas>
-    <interviewLabel>Limits_Snapshot_Process-4_InterviewLabel</interviewLabel>
+    <interviewLabel>Limits_Snapshot_Process-3_InterviewLabel</interviewLabel>
     <label>Limits Snapshot Process</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -405,7 +405,7 @@
             </processMetadataValues>
             <field>PercentChangedSinceLastSnapshot__c</field>
             <value>
-                <elementReference>formula_2_myRule_1_A1_8920509623</elementReference>
+                <elementReference>formula_2_myRule_1_A1_3627824591</elementReference>
             </value>
         </inputAssignments>
         <object>LimitSnapshot__c</object>
@@ -452,6 +452,42 @@
                 <elementReference>myVariable_current.Limit__c</elementReference>
             </value>
         </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Number</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Last Percent of Limit</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>LastPercentOfLimit__c</field>
+            <value>
+                <elementReference>myVariable_current.PercentOfLimit__c</elementReference>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <processMetadataValues>
                 <name>dataType</name>

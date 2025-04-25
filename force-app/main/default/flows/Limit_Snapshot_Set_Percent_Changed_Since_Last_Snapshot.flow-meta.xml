@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>When a Limit Snapshot is inserted, calculate the &quot;Percent Changed Since Last Snapshot&quot; field.</description>
+    <formulas>
+        <name>percentChanged</name>
+        <dataType>Number</dataType>
+        <expression>({!percentOfLimit} - BLANKVALUE({!$Record.Limit__r.LastPercentOfLimit__c}, 0)) * 100</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>percentOfLimit</name>
+        <dataType>Number</dataType>
+        <expression>IF(
+  NOT(ISBLANK({!$Record.MaximumValue__c})),
+  BLANKVALUE({!$Record.Value__c}, 0) / {!$Record.MaximumValue__c},
+  0
+)</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Limit Snapshot: Set Percent Changed Since Last Snapshot {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Limit Snapshot: Set Percent Changed Since Last Snapshot</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Calculate_Percent_Changed_Since_Last_Snapshot</name>
+        <label>Calculate Percent Changed Since Last Snapshot</label>
+        <locationX>176</locationX>
+        <locationY>287</locationY>
+        <inputAssignments>
+            <field>PercentChangedSinceLastSnapshot__c</field>
+            <value>
+                <elementReference>percentChanged</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Calculate_Percent_Changed_Since_Last_Snapshot</targetReference>
+        </connector>
+        <object>LimitSnapshot__c</object>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

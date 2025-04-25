@@ -3,8 +3,8 @@
     <fullName>PercentOfLimit__c</fullName>
     <externalId>false</externalId>
     <formula>IF(
-  MaximumValue__c != 0,
-  Value__c /  MaximumValue__c,
+  BLANKVALUE(MaximumValue__c, 0) != 0,
+  BLANKVALUE(Value__c, 0) /  MaximumValue__c,
   0
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>

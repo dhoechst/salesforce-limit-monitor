@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>When a Limit Snapshot is created, update its parent Limit&apos;s &quot;Last Percent of Limit&quot; and &quot;Last Snapshot Value&quot; fields with data from the current snapshot.</description>
+    <environments>Default</environments>
     <interviewLabel>Limit Snapshot: Update Limit&apos;s &quot;Last Value&quot; Fields {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Limit Snapshot: Update Limit&apos;s &quot;Last Value&quot; Fields</label>
     <processMetadataValues>
@@ -48,6 +51,7 @@
             <targetReference>Update_Limits_Last_Values</targetReference>
         </connector>
         <object>LimitSnapshot__c</object>
+        <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>

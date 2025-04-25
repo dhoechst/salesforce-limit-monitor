@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limit_Notification_Queue_Limit</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Limit Notification Queue</label>
+    <queue>Limit_Notification_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

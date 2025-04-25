@@ -10,12 +10,15 @@
         <faultConnector>
             <targetReference>Catch_Email_Error</targetReference>
         </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
+        <nameSegment>LimitSnapshot__c.Limit_Value_Threshold_Exceeded</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <actionCalls>
         <name>Send_Notification</name>
@@ -30,6 +33,7 @@
         <faultConnector>
             <targetReference>Catch_Notification_Error</targetReference>
         </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
@@ -60,7 +64,11 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
     </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <description>Explicitly assigns the flow fault message in an variable for inspection
 Subscribers might add their own logging logic here instead.</description>
@@ -91,6 +99,7 @@ Subscribers might add their own logging logic here instead.</description>
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Send_Email_Alert_Limit_Value_Threshold_Exceeded</targetReference>
         </connector>
     </assignments>
@@ -111,6 +120,7 @@ Subscribers might add their own logging logic here instead.</description>
         </connector>
     </assignments>
     <description>When a Limit Snapshot&apos;s value exceeds the raw thresholds defined by its parent Limit record, send a push notification and email alert to all members of the Limit Notification Queue.</description>
+    <environments>Default</environments>
     <interviewLabel>Limit Snapshot: Notify if Percent of Limit Exceeds Threshold {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Limit Snapshot: Notify if Percent of Limit Exceeds Threshold</label>
     <processMetadataValues>
@@ -142,8 +152,10 @@ Subscribers might add their own logging logic here instead.</description>
             <targetReference>Set_Recipient_Ids</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Catch_Notification_Error</targetReference>
         </faultConnector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
@@ -174,8 +186,10 @@ Subscribers might add their own logging logic here instead.</description>
             <targetReference>notificationQueue</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Catch_Notification_Error</targetReference>
         </faultConnector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
@@ -195,12 +209,18 @@ Subscribers might add their own logging logic here instead.</description>
         <connector>
             <targetReference>notificationType</targetReference>
         </connector>
+        <filterFormula>AND(
+  NOT({!$Record.Limit__r.MuteAlerts__c}),
+  BLANKVALUE({!$Record.PercentOfLimit__c}, 0) &gt;= BLANKVALUE({!$Record.Limit__r.TemporaryAlertThreshold__c}, BLANKVALUE({!$Record.Limit__r.AlertThreshold__c}, 0))
+)</filterFormula>
         <object>LimitSnapshot__c</object>
+        <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
     <textTemplates>
         <name>notificationBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>The limit for {!$Record.Limit__r.Name} has exceeded the threshold set.
 
 Current Value: {!$Record.Value__c}
@@ -215,6 +235,7 @@ Change Threshold: {!$Record.Limit__r.ChangeThreshold__c}%</text>
     </textTemplates>
     <textTemplates>
         <name>notificationTitle</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Alert for Limit {!$Record.Limit__r.Name}</text>
     </textTemplates>
     <variables>

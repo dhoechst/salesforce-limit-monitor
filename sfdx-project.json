@@ -10,7 +10,7 @@
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "47.0",
+    "sourceApiVersion": "63.0",
     "packageAliases": {
         "limits-monitor": "0Ho4O000000CaRHSA0",
         "limits-monitor@0.2.0-1": "04t4O000000MjS8QAK"

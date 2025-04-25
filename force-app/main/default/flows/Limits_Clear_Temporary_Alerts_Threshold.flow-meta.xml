@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Once a Limit&apos;s &quot;Temporary Alert Threshold&quot; expires, clear the Temporary Alert Threshold details.</description>
+    <environments>Default</environments>
     <interviewLabel>Limits: Clear Temporary Alerts Threshold {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Limits: Clear Temporary Alerts Threshold</label>
     <processMetadataValues>
@@ -38,6 +41,7 @@
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>TemporaryAlertThresholdExpiration__c</field>
             <operator>IsNull</operator>
@@ -46,6 +50,18 @@
             </value>
         </filters>
         <object>Limit__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Temporary_Threshold_Expires</name>
+            <connector>
+                <targetReference>Clear_Temporary_Threshold</targetReference>
+            </connector>
+            <label>Temporary Threshold Expires</label>
+            <offsetNumber>0</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>TemporaryAlertThresholdExpiration__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>

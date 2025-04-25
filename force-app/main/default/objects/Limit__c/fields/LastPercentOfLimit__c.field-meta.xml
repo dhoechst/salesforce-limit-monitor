@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>LastPercentOfLimit__c</fullName>
-    <externalId>false</externalId>
     <inlineHelpText>The percent of limit when the last snapshot was taken.</inlineHelpText>
     <label>Last Percent of Limit</label>
     <precision>18</precision>

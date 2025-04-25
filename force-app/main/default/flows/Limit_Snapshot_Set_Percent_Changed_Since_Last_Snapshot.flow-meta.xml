@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>When a Limit Snapshot is inserted, calculate the &quot;Percent Changed Since Last Snapshot&quot; field.</description>
+    <environments>Default</environments>
     <formulas>
         <name>percentChanged</name>
         <dataType>Number</dataType>
@@ -58,6 +61,7 @@
             <targetReference>Calculate_Percent_Changed_Since_Last_Snapshot</targetReference>
         </connector>
         <object>LimitSnapshot__c</object>
+        <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
     <status>Active</status>

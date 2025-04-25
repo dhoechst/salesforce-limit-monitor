@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>LastRetrieveTime__c</fullName>
-    <externalId>false</externalId>
     <inlineHelpText>The last Date/Time a snapshot was retrieved</inlineHelpText>
     <label>Last Retrieve Time</label>
     <summarizedField>LimitSnapshot__c.CreatedDate</summarizedField>

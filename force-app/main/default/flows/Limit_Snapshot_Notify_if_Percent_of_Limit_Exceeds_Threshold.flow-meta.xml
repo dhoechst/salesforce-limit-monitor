@@ -111,8 +111,8 @@ Subscribers might add their own logging logic here instead.</description>
         </connector>
     </assignments>
     <description>When a Limit Snapshot&apos;s value exceeds the raw thresholds defined by its parent Limit record, send a push notification and email alert to all members of the Limit Notification Queue.</description>
-    <interviewLabel>Limit Snapshot: Notify if Percent of Limit Threshold Exceeded {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Limit Snapshot: Notify if Percent of Limit Threshold Exceeded</label>
+    <interviewLabel>Limit Snapshot: Notify if Percent of Limit Exceeds Threshold {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Limit Snapshot: Notify if Percent of Limit Exceeds Threshold</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

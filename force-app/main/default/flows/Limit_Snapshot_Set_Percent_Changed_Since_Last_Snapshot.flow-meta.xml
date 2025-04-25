@@ -11,7 +11,7 @@
         <name>percentOfLimit</name>
         <dataType>Number</dataType>
         <expression>IF(
-  NOT(ISBLANK({!$Record.MaximumValue__c})),
+  BLANKVALUE({!$Record.MaximumValue__c}, 0) != 0,
   BLANKVALUE({!$Record.Value__c}, 0) / {!$Record.MaximumValue__c},
   0
 )</expression>

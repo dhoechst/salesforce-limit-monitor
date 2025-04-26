@@ -2,9 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PercentChangedSinceLastSnapshot__c</fullName>
     <label>Percent Changed Since Last Snapshot</label>
-    <precision>18</precision>
+    <precision>16</precision>
     <required>false</required>
-    <scale>0</scale>
+    <scale>2</scale>
     <trackTrending>false</trackTrending>
     <type>Percent</type>
 </CustomField>

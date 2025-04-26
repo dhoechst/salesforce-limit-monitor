@@ -7,7 +7,7 @@
     <formulas>
         <name>percentChanged</name>
         <dataType>Number</dataType>
-        <expression>({!percentOfLimit} - BLANKVALUE({!$Record.Limit__r.LastPercentOfLimit__c}, 0)) * 100</expression>
+        <expression>{!percentOfLimit} - BLANKVALUE({!$Record.Limit__r.LastPercentOfLimit__c}, 0)</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
@@ -15,7 +15,7 @@
         <dataType>Number</dataType>
         <expression>IF(
   BLANKVALUE({!$Record.MaximumValue__c}, 0) != 0,
-  BLANKVALUE({!$Record.Value__c}, 0) / {!$Record.MaximumValue__c},
+  (BLANKVALUE({!$Record.Value__c}, 0) / {!$Record.MaximumValue__c}) * 100,
   0
 )</expression>
         <scale>2</scale>

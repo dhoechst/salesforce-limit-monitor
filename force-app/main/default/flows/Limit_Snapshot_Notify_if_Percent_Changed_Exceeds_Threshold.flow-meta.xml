@@ -235,6 +235,7 @@ Change Threshold: {!$Record.Limit__r.ChangeThreshold__c}%</text>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Alert for Limit {!$Record.Limit__r.Name}</text>
     </textTemplates>
+    <triggerOrder>1500</triggerOrder>
     <variables>
         <name>error</name>
         <dataType>String</dataType>

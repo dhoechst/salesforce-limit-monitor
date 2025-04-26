@@ -226,13 +226,19 @@ Subscribers might add their own logging logic here instead.</description>
 Current Value: {!$Record.Value__c}
 Limit: {!$Record.MaximumValue__c}
 Percent of Limit: {!$Record.PercentOfLimit__c}%
-Alert Threshold: {!$Record.Limit__r.AlertThreshold__c}</text>
+Alert Threshold: {!$Record.Limit__r.AlertThreshold__c}
+Current Value: {!$Record.Value__c}
+Previous Value: {!$Record.Limit__r.LastSnapshotValue__c}
+Limit: {!$Record.MaximumValue__c}
+Percent Changed: {!$Record.PercentChangedSinceLastSnapshot__c}% 
+Change Threshold: {!$Record.Limit__r.ChangeThreshold__c}%</text>
     </textTemplates>
     <textTemplates>
         <name>notificationTitle</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Alert for Limit {!$Record.Limit__r.Name}</text>
     </textTemplates>
+    <triggerOrder>500</triggerOrder>
     <variables>
         <name>error</name>
         <dataType>String</dataType>

@@ -211,6 +211,7 @@ Subscribers might add their own logging logic here instead.</description>
         </connector>
         <filterFormula>AND(
   NOT({!$Record.Limit__r.MuteAlerts__c}),
+  NOT(ISBLANK({!$Record.Limit__r.LastPercentOfLimit__c})),
   BLANKVALUE({!$Record.PercentChangedSinceLastSnapshot__c}, 0) &gt;= BLANKVALUE({!$Record.Limit__r.ChangeThreshold__c}, 0)
 )</filterFormula>
         <object>LimitSnapshot__c</object>

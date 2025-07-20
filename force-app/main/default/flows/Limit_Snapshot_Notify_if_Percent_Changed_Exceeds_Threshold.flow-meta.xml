@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_Alert_Limit_Change_Threshold_Exceeded</name>
+        <label>Send Email Alert</label>
+        <locationX>176</locationX>
+        <locationY>755</locationY>
+        <actionName>LimitSnapshot__c.Limit_Change_Threshold_Exceeded</actionName>
+        <actionType>emailAlert</actionType>
+        <faultConnector>
+            <targetReference>Catch_Email_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LimitSnapshot__c.Limit_Change_Threshold_Exceeded</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Notification</name>
+        <label>Send Notification</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Send_Email_Alert_Limit_Change_Threshold_Exceeded</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Catch_Notification_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>notificationType.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>recipientIds</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>notificationTitle</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>notificationBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Explicitly assigns the flow fault message in an variable for inspection
+Subscribers might add their own logging logic here instead.</description>
+        <name>Catch_Email_Error</name>
+        <label>Catch Error</label>
+        <locationX>440</locationX>
+        <locationY>863</locationY>
+        <assignmentItems>
+            <assignToReference>error</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Explicitly assigns the flow fault message in an variable for inspection
+Subscribers might add their own logging logic here instead.</description>
+        <name>Catch_Notification_Error</name>
+        <label>Catch Error</label>
+        <locationX>704</locationX>
+        <locationY>755</locationY>
+        <assignmentItems>
+            <assignToReference>error</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Email_Alert_Limit_Change_Threshold_Exceeded</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Recipient_Ids</name>
+        <label>Set Recipient Ids</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>recipientIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>notificationQueue.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_Notification</targetReference>
+        </connector>
+    </assignments>
+    <description>When a Limit Snapshot&apos;s value exceeds the percentage change thresholds defined by its parent Limit record, send a push notification and email alert to all members of the Limit Notification Queue.</description>
+    <environments>Default</environments>
+    <interviewLabel>Limit Snapshot: Notify if Percent Changed Exceeds Threshold {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Limit Snapshot: Notify if Percent Changed Exceeds Threshold</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>notificationQueue</name>
+        <label>Get Notification Queue</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Recipient_Ids</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Catch_Notification_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Limit_Notification_Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <sortField>Id</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>notificationType</name>
+        <label>Get Notification Type</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>notificationQueue</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Catch_Notification_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Limit_Alert</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <sortField>Id</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>notificationType</targetReference>
+        </connector>
+        <filterFormula>AND(
+  NOT({!$Record.Limit__r.MuteAlerts__c}),
+  NOT(ISBLANK({!$Record.Limit__r.LastPercentOfLimit__c})),
+  BLANKVALUE({!$Record.PercentChangedSinceLastSnapshot__c}, 0) &gt;= BLANKVALUE({!$Record.Limit__r.ChangeThreshold__c}, 0)
+)</filterFormula>
+        <object>LimitSnapshot__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>notificationBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>The limit for {!$Record.Limit__r.Name} has exceeded the threshold set for percent of change between snapshots.
+
+Current Value: {!$Record.Value__c}
+Previous Value: {!$Record.Limit__r.LastSnapshotValue__c}
+Limit: {!$Record.MaximumValue__c}
+Percent Changed: {!$Record.PercentChangedSinceLastSnapshot__c}% 
+Change Threshold: {!$Record.Limit__r.ChangeThreshold__c}%</text>
+    </textTemplates>
+    <textTemplates>
+        <name>notificationTitle</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alert for Limit {!$Record.Limit__r.Name}</text>
+    </textTemplates>
+    <triggerOrder>1500</triggerOrder>
+    <variables>
+        <name>error</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recipientIds</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

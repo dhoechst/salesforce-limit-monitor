@@ -2,7 +2,7 @@
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>test-syzy9prs2qga@example.com</sharedTo>
+        <sharedTo>test-xrim69vl0ijm@example.com</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <name>Limits Reports</name>

@@ -1,4 +1,6 @@
 public with sharing class LimitsUtil {
+  private static final String INVALID_LIMIT = 'The limit key is invalid. Please check the key and update.';
+  
   public static void retrieveLimits() {
     // get the current org limits
     Map<String, System.OrgLimit> limitsMap = OrgLimits.getMap();
@@ -34,10 +36,13 @@ public with sharing class LimitsUtil {
 
   public static void deleteLimits() {
     // Delete all snapshots older than the retention days set on each limit
-    Database.delete(
-      [SELECT Id FROM LimitSnapshot__c WHERE PastRetentionPeriod__c = true]
-    );
+    List<LimitSnapshot__c> snapshots = [
+      SELECT Id 
+      FROM LimitSnapshot__c 
+      WHERE 
+      PastRetentionPeriod__c = true 
+      WITH SYSTEM_MODE
+    ];
+    Database.delete(snapshots, System.AccessLevel.SYSTEM_MODE);
   }
-
-  private static final String INVALID_LIMIT = 'The limit key is invalid. Please check the key and update.';
 }

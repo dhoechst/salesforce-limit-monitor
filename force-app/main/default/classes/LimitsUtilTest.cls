@@ -62,24 +62,19 @@ public with sharing class LimitsUtilTest {
       LimitKey__c = 'DailyApiRequests',
       AlertThreshold__c = .8,
       ChangeThreshold__c = .2,
-      SnapshotRetentionDays__c = 0
+      SnapshotRetentionDays__c = -1
     );
     insert testLimit;
-
     LimitsUtil.retrieveLimits();
 
     Test.startTest();
     LimitsUtil.deleteLimits();
     Test.stopTest();
 
-    List<LimitSnapshot__c> snapshots = [
-      SELECT Id
-      FROM LimitSnapshot__c
-      WHERE Limit__c = :testLimit.Id
-    ];
-    System.assert(
+    List<LimitSnapshot__c> snapshots = [SELECT Id FROM LimitSnapshot__c];
+    Assert.isTrue(
       snapshots.isEmpty(),
-      'All limits snapshots should have been deleted'
+      'All limits snapshots should have been deleted: ' + snapshots
     );
   }
 }

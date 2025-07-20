@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>When a Limit Snapshot is created, update its parent Limit&apos;s &quot;Last Percent of Limit&quot; and &quot;Last Snapshot Value&quot; fields with data from the current snapshot.</description>
+    <environments>Default</environments>
+    <interviewLabel>Limit Snapshot: Update Limit&apos;s &quot;Last Value&quot; Fields {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Limit Snapshot: Update Limit&apos;s &quot;Last Value&quot; Fields</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Limits_Last_Values</name>
+        <label>Update Limit&apos;s Last Value(s)</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>LastPercentOfLimit__c</field>
+            <value>
+                <elementReference>$Record.PercentOfLimit__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastSnapshotValue__c</field>
+            <value>
+                <elementReference>$Record.Value__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Limit__r</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Limits_Last_Values</targetReference>
+        </connector>
+        <object>LimitSnapshot__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>1700</triggerOrder>
+</Flow>

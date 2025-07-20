@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PercentOfLimit__c</fullName>
-    <externalId>false</externalId>
-    <formula>Value__c /  MaximumValue__c</formula>
+    <formula>IF(
+  BLANKVALUE(MaximumValue__c, 0) != 0,
+  BLANKVALUE(Value__c, 0) /  MaximumValue__c,
+  0
+)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <inlineHelpText>The percent of the limit used in the org at time of snapshot</inlineHelpText>
     <label>Percent of Limit</label>

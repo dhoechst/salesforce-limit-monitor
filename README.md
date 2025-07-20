@@ -5,13 +5,10 @@ You can also mute notifications for a certain time period or temporarily increas
 
 Installation steps
 
-> :warning: There is a known issue that prevents users from opening process builder from unlocked packages. Until this error is fixed, you won't be able to modify them. See https://success.salesforce.com/issues_view?id=a1p3A0000003UVoQAM
-
-1. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4O000000MjS8QAK)
+1. Clone and deploy using sfdx or as an unlocked package (https://login.salesforce.com/packaging/installPackage.apexp?p0=04tKW0000002BYjYAM)
 2. If you want to send emails people or systems not in Salesforce. Update the [email alerts](https://github.com/dhoechst/salesforce-limit-monitor/blob/master/force-app/main/default/workflows/LimitSnapshot__c.workflow-meta.xml) with the correct email address.
 3. To get emails and push notifications, add users to the Limit Notification Queue.
-4. You may have to edit the two invocable processes once deployed because the process builder metadata contains the queue Id and it doesn't deploy correctly.
-5. Add Limits records for limits you want to monitor. Make the owner be the Limit Notification Queue to send an email to all members of the queue. To add all limits, run this in Execute Anonymous:
+4. Add Limits records for limits you want to monitor. Make the owner be the Limit Notification Queue to send an email to all members of the queue. To add all limits, run this in Execute Anonymous:
 ```java
 Id limitsQueue = [SELECT Id FROM Group WHERE DeveloperName = 'Limit_Notification_Queue'].Id;
 Map<String,System.OrgLimit> limitsMap = OrgLimits.getMap();
@@ -27,7 +24,7 @@ for (String lim : limitsMap.keySet()) {
 
 insert limits;
 ```
-6. Schedule the monitoring job using Execute Anonymous. In this case, it is scheduled to run every 15 minutes:
+5. Schedule the monitoring job using Execute Anonymous. In this case, it is scheduled to run every 15 minutes:
 ```java
 System.schedule('Limits Monitor 1', '0 0 * * * ?', new LimitsSnapshotSchedule());
 System.schedule('Limits Monitor 2', '0 15 * * * ?', new LimitsSnapshotSchedule());
